@@ -1,6 +1,27 @@
-.project-image {
-    width: 100%;
+/* Section Contact dengan warna background berbeda */
+#contact {
+    background-color: #1e1e2f; /* bisa juga #2c2f48 untuk biru gelap */
+    padding: 40px 20px;
+    color: white;
+  }
+  
+  /* Jika sebelumnya pakai background hitam: */
+  body {
+    background-color: #000;
+  }
+  
+  /* Style tambahan */
+  #contact .content {
     max-width: 600px;
-    border-radius: 8px;
-    margin-top: 10px;
-}
+    margin: 0 auto;
+  }
+  
+  #contact a {
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  #contact a:hover {
+    text-decoration: underline;
+  }
+  
