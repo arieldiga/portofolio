@@ -40,3 +40,15 @@
 .projects-section {
   padding: 30px 0; /* pastikan sama */
 }
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-photo img {
+    width: 150px;
+    height: 150px;
+  }
+}
