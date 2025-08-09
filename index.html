@@ -142,7 +142,7 @@
     </div>
   </section>
 
- <!-- ===== About Me Section ===== -->
+<!-- ===== About Me Section ===== -->
 <section id="about" class="about-section">
   <div class="container">
     <h2 class="section-title">About Me</h2>
@@ -334,29 +334,105 @@
   });
 </script>
 
-
-<!-- JS untuk animasi -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const bars = document.querySelectorAll(".progress-bar");
-
-        bars.forEach(bar => {
-            let progressValue = bar.getAttribute("data-progress");
-            let progressFill = bar.querySelector(".progress");
-            let counter = 0;
-
-            let interval = setInterval(() => {
-                if (counter >= progressValue) {
-                    clearInterval(interval);
-                } else {
-                    counter++;
-                    progressFill.style.width = counter + "%";
-                    progressFill.setAttribute("data-label", counter + "%");
-                }
-            }, 15); // kecepatan animasi
-        });
-    });
-</script>
+  <section id="projects">
+    <div class="content">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+  
+        <div class="project-card">
+          <img src="menuutamasecurediary.png" alt="Secure Notes Screenshot" style="width:100%; max-width:600px; border-radius:8px; margin-top:10px;" />
+          <div class="project-info">
+            <h3>Secure Notes App</h3>
+            <p>Aplikasi catatan aman menggunakan algoritma AES dan Caesar, dibangun dengan Flask dan HTML5.</p>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">AES</span>
+            <span class="tech-tag">HTML5</span>
+          </div>
+        </div>
+  
+        <div class="project-card">
+          <img src="backendhotel.png" alt="Secure Notes Screenshot" style="width:100%; max-width:600px; border-radius:8px; margin-top:10px;" />
+          <div class="project-info">
+            <h3>Aplikasi Pemesanan Tiket Hotel</h3>
+            <p>Aplikasi berbasis web untuk memudahkan pembayaran listrik pascabayar secara online. Dibangun menggunakan Laravel dan Bootstrap.</p>
+            <span class="tech-tag">Laravel</span>
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">MySQL</span>
+          </div>
+        </div>
+  
+        <div class="project-card">
+          <div class="project-img blank-img">📷</div>
+          <div class="project-info">
+            <h3>Portofolio Website</h3>
+            <p>Website portofolio pribadi ini dibangun dengan HTML & CSS tanpa framework dan bisa diakses secara offline.</p>
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">Offline</span>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+  <style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .project-card {
+    background: #1f2937;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .project-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #f0f0f0;
+  }
+  
+  .blank-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #aaa;
+    height: 180px;
+    background: #2a2a2a;
+  }
+  
+  .project-info {
+    padding: 16px;
+  }
+  
+  .project-info h3 {
+    margin: 0 0 10px;
+  }
+  
+  .tech-tag {
+    display: inline-block;
+    background: #e0e0e0;
+    color: #333;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    margin-right: 6px;
+    margin-top: 10px;
+  }
+  </style>
   
 
   <section id="contact">
