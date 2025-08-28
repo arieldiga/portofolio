@@ -147,7 +147,7 @@
   <div class="container about-container">
     <!-- Foto Profil -->
     <div class="about-photo">
-      <img src="me.jpg" alt="Foto Saya">
+      <img src="me2.jpg" alt="Foto Saya">
     </div>
 
     <!-- Deskripsi -->
@@ -174,27 +174,27 @@
   <div class="container">
     <h2 class="section-title">Skills & Expertise</h2>
     <div class="skills-grid">
-      <div class="skill-card" data-skill="95">
+      <div class="skill-card" data-skill="75">
         <h3>JavaScript</h3>
         <div class="progress-bar"><span></span></div>
         <p class="percent">0%</p>
       </div>
-      <div class="skill-card" data-skill="90">
+      <div class="skill-card" data-skill="75">
         <h3>React</h3>
         <div class="progress-bar"><span></span></div>
         <p class="percent">0%</p>
       </div>
-      <div class="skill-card" data-skill="90">
+      <div class="skill-card" data-skill="75">
         <h3>Next.js</h3>
         <div class="progress-bar"><span></span></div>
         <p class="percent">0%</p>
       </div>
-      <div class="skill-card" data-skill="85">
+      <div class="skill-card" data-skill="70">
         <h3>Node.js</h3>
         <div class="progress-bar"><span></span></div>
         <p class="percent">0%</p>
       </div>
-      <div class="skill-card" data-skill="85">
+      <div class="skill-card" data-skill="65">
         <h3>UI/UX Design</h3>
         <div class="progress-bar"><span></span></div>
         <p class="percent">0%</p>
@@ -209,7 +209,7 @@
         <div class="progress-bar"><span></span></div>
         <p class="percent">0%</p>
       </div>
-      <div class="skill-card" data-skill="80">
+      <div class="skill-card" data-skill="70">
         <h3>Inertia</h3>
         <div class="progress-bar"><span></span></div>
         <p class="percent">0%</p>
@@ -217,6 +217,108 @@
     </div>
   </div>
 </section>
+
+<style>
+/* ===== Skills Section Style ===== */
+.skills-section {
+  padding: 80px 20px;
+  background: #111;
+  color: #fff;
+  text-align: center;
+}
+
+.skills-section .section-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  background: #1e1e1e;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #333;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet);
+  border-radius: 6px;
+  transition: width 1.5s ease;
+}
+
+.progress-bar span.rgb {
+  animation: rgbAnimation 3s linear infinite;
+}
+
+@keyframes rgbAnimation {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.percent {
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+</style>
+
+<script>
+// Animasi progress bar saat masuk & keluar viewport
+document.addEventListener("DOMContentLoaded", () => {
+  const skillCards = document.querySelectorAll(".skill-card");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const bar = entry.target.querySelector(".progress-bar span");
+      const percentText = entry.target.querySelector(".percent");
+      const target = parseInt(entry.target.getAttribute("data-skill"));
+
+      if (entry.isIntersecting) {
+        let progress = 0;
+        bar.style.width = "0%";
+        percentText.textContent = "0%";
+
+        const interval = setInterval(() => {
+          if (progress >= target) {
+            clearInterval(interval);
+            bar.classList.add("rgb"); // Aktifkan animasi RGB saat standby
+          } else {
+            progress++;
+            bar.style.width = progress + "%";
+            percentText.textContent = progress + "%";
+          }
+        }, 20);
+      } else {
+        // Reset jika keluar dari viewport
+        bar.style.width = "0%";
+        percentText.textContent = "0%";
+        bar.classList.remove("rgb");
+      }
+    });
+  }, { threshold: 0.5 });
+
+  skillCards.forEach(card => observer.observe(card));
+});
+</script>
+
 
 <!-- ===== CSS ===== -->
 <style>
@@ -266,7 +368,7 @@
   border-radius: 50%;
   border: 4px solid #ff4fd8;
   object-fit: cover;
-  object-position: 70% 20%; /* geser kanan 60%, tengah vertikal */
+  object-position: 50% 30%; /* geser kanan 60%, tengah vertikal */
 }
 
 
