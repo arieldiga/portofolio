@@ -147,14 +147,14 @@
   <div class="container about-container">
     <!-- Foto Profil -->
     <div class="about-photo">
-      <img src="me.jpg" alt="Foto Saya">
+      <img src="images/me.jpg" alt="Foto Saya">
     </div>
 
     <!-- Deskripsi -->
     <div class="about-content">
       <h2 class="section-title">About Me</h2>
       <p class="about-text">
-        Saya adalah mahasiswa semester 7 jurusan Teknologi Informasi di Universitas Bina Sarana Informatika. 
+        Saya adalah mahasiswa semester 8 jurusan Teknologi Informasi di Universitas Bina Sarana Informatika. 
         Saya memiliki ketertarikan besar di bidang pengembangan web, keamanan informasi, dan pengolahan data. 
         Saat ini saya sedang mencari peluang magang untuk mengembangkan keterampilan saya di dunia industri.
       </p>
@@ -169,114 +169,174 @@
   </div>
 </section>
 
-<!-- ===== Skills Section ===== -->
-<section id="skills" class="skills-section">
-  <div class="container">
-    <h2 class="section-title">Skills & Expertise</h2>
-    <div class="skills-grid">
-      <div class="skill-card" data-skill="75">
-        <h3>JavaScript</h3>
-        <div class="progress-bar"><span></span></div>
-        <p class="percent">0%</p>
+<!-- ===== Resume Section ===== -->
+<section id="resume">
+  <div class="content">
+    <div class="resume-wrapper">
+
+      <!-- KIRI: Education & Experience -->
+      <div class="resume-left">
+
+        <div class="resume-group">
+          <h3 class="resume-group-title">Education</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <h4>Universitas Bina Sarana Informatika</h4>
+                <span class="timeline-date">2022 - Sekarang</span>
+                <p>Fokus pada pengembangan aplikasi web dan teknologi interaktif.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="resume-group">
+          <h3 class="resume-group-title">Experience</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <h4>Magang Software Engineer di Lautan Air Indonesia</h4>
+                <span class="timeline-date">September 2025 - Desember 2025</span>
+                <p>Mengembangkan aplikasi web (Laravel, JavaScript) untuk monitoring IoT berbasis MQTT, termasuk integrasi API dan berperan sebagai QC.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="skill-card" data-skill="75">
-        <h3>React</h3>
-        <div class="progress-bar"><span></span></div>
-        <p class="percent">0%</p>
+
+      <!-- KANAN: Skills -->
+      <div class="resume-right">
+        <h3 class="resume-group-title">Skills</h3>
+        <div id="skills" class="skills-section" style="padding:0; background:transparent;">
+          <div class="container">
+            <div class="skills-grid" style="grid-template-columns: 1fr; max-width: 90%;">
+              <!-- skill cards tetap pakai milik kamu -->
+              <div class="skill-card" data-skill="80">
+                <h3>JavaScript</h3>
+                <div class="progress-bar"><span></span></div>
+                <p class="percent">0%</p>
+              </div>
+              <div class="skill-card" data-skill="50">
+                <h3>React</h3>
+                <div class="progress-bar"><span></span></div>
+                <p class="percent">0%</p>
+              </div>
+              <div class="skill-card" data-skill="80">
+                <h3>CSS</h3>
+                <div class="progress-bar"><span></span></div>
+                <p class="percent">0%</p>
+              </div>
+              <div class="skill-card" data-skill="70">
+                <h3>Node.js</h3>
+                <div class="progress-bar"><span></span></div>
+                <p class="percent">0%</p>
+              </div>
+              <div class="skill-card" data-skill="65">
+                <h3>UI/UX Design</h3>
+                <div class="progress-bar"><span></span></div>
+                <p class="percent">0%</p>
+              </div>
+              <div class="skill-card" data-skill="80">
+                <h3>Database</h3>
+                <div class="progress-bar"><span></span></div>
+                <p class="percent">0%</p>
+              </div>
+              <div class="skill-card" data-skill="80">
+                <h3>Laravel API</h3>
+                <div class="progress-bar"><span></span></div>
+                <p class="percent">0%</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="skill-card" data-skill="75">
-        <h3>Next.js</h3>
-        <div class="progress-bar"><span></span></div>
-        <p class="percent">0%</p>
-      </div>
-      <div class="skill-card" data-skill="70">
-        <h3>Node.js</h3>
-        <div class="progress-bar"><span></span></div>
-        <p class="percent">0%</p>
-      </div>
-      <div class="skill-card" data-skill="65">
-        <h3>UI/UX Design</h3>
-        <div class="progress-bar"><span></span></div>
-        <p class="percent">0%</p>
-      </div>
-      <div class="skill-card" data-skill="80">
-        <h3>Database</h3>
-        <div class="progress-bar"><span></span></div>
-        <p class="percent">0%</p>
-      </div>
-      <div class="skill-card" data-skill="80">
-        <h3>Laravel API</h3>
-        <div class="progress-bar"><span></span></div>
-        <p class="percent">0%</p>
-      </div>
-      <div class="skill-card" data-skill="70">
-        <h3>Inertia</h3>
-        <div class="progress-bar"><span></span></div>
-        <p class="percent">0%</p>
-      </div>
+
     </div>
   </div>
 </section>
 
 <style>
-/* ===== Skills Section Style ===== */
-.skills-section {
+/* ===== Resume Section Background ===== */
+#resume {
+  background-color: #1a1a2e;
   padding: 80px 20px;
-  background: #111;
-  color: #fff;
-  text-align: center;
 }
 
-.skills-section .section-title {
-  font-size: 2.5rem;
+/* ===== Resume Layout ===== */
+.resume-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  max-width: 900px;   /* biar tidak terlalu lebar */
+  margin: 0 auto;
+}
+
+.resume-group {
   margin-bottom: 40px;
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+.resume-group-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #7c4dff;           /* ungu lebih terang biar kontras di bg gelap */
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.skill-card {
-  background: #1e1e1e;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+/* ===== Timeline ===== */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-left: 2px solid #7c4dff;
+  padding-left: 20px;
 }
 
-.progress-bar {
-  width: 100%;
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  width: 12px;
   height: 12px;
-  background: #333;
-  border-radius: 6px;
-  overflow: hidden;
-  margin: 10px 0;
+  background: #7c4dff;
+  border-radius: 50%;
+  position: absolute;
+  left: -27px;
+  top: 4px;
+  box-shadow: 0 0 6px #7c4dff;   /* efek glow kecil */
 }
 
-.progress-bar span {
+.timeline-body h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #f2f2f2;
+}
+
+.timeline-date {
+  font-size: 0.82rem;
+  color: #aaa;
   display: block;
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet);
-  border-radius: 6px;
-  transition: width 1.5s ease;
+  margin-bottom: 6px;
 }
 
-.progress-bar span.rgb {
-  animation: rgbAnimation 3s linear infinite;
+.timeline-body p {
+  font-size: 0.9rem;
+  color: #ccc;
+  line-height: 1.5;
 }
 
-@keyframes rgbAnimation {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-
-.percent {
-  margin-top: 5px;
-  font-weight: bold;
-  font-size: 14px;
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .resume-wrapper {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 
@@ -401,14 +461,14 @@ document.addEventListener("DOMContentLoaded", () => {
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 15px;
   }
 
   .skill-card {
     background: #16213e;
-    padding: 20px;
+    padding: 5px;
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
   }
 
   .skill-card h3 {
@@ -476,13 +536,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 </script>
 
+  <!-- ===== Projects Section ===== -->
   <section id="projects">
     <div class="content">
       <h2 class="section-title">Projects</h2>
       <div class="projects-grid">
   
         <div class="project-card">
-          <img src="menuutamasecurediary.png" alt="Secure Notes Screenshot" style="width:100%; max-width:600px; border-radius:8px; margin-top:10px;" />
+          <img src="images/menuutamasecurediary.png" alt="Secure Notes Screenshot" style="width:100%; height:180px; object-fit:cover; border-radius:8px 8px 0 0;" />
           <div class="project-info">
             <h3>Secure Notes App</h3>
             <p>Aplikasi catatan aman menggunakan algoritma AES dan Caesar.</p>
@@ -493,14 +554,28 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
   
         <div class="project-card">
-          <img src="backendhotel.png" alt="Secure Notes Screenshot" style="width:100%; max-width:600px; border-radius:8px; margin-top:10px;" />
+          <img src="images/backendhotel.png" alt="Hotel Booking Screenshot" style="width:100%; height:180px; object-fit:cover; border-radius:8px 8px 0 0;" />
           <div class="project-info">
             <h3>Aplikasi Pemesanan Tiket Hotel</h3>
             <p>Aplikasi web untuk membantu admin dan resepsionis mengelola pesanan konsumen di hotel secara offline.</p>
             <span class="tech-tag">Laravel</span>
             <span class="tech-tag">PHP</span>
             <span class="tech-tag">MySQL</span>
-            <span class="tech-tag">Boosttrap</span>
+            <span class="tech-tag">Bootstrap</span>
+          </div>
+        </div>
+
+        <!-- ===== NEW PROJECT: Ticket Complaint System ===== -->
+        <div class="project-card">
+          <img src="images/ticket_complaint.png" alt="Ticket Complaint System Screenshot" style="width:100%; height:180px; object-fit:cover; border-radius:8px 8px 0 0;" />
+          <div class="project-info">
+            <h3>Ticket Complaint System</h3>
+            <p>Sistem manajemen tiket keluhan pelanggan dengan dashboard analitik, NCR tracking, dan notifikasi email. Dibuat saat magang di PT Lautan Air Indonesia.</p>
+            <span class="tech-tag">Laravel</span>
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">Javascript</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Bootstrap</span>
           </div>
         </div>
   
