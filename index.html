@@ -49,7 +49,7 @@ body{
 a{color:inherit;text-decoration:none;}
 ul{list-style:none;}
 img{max-width:100%;display:block;}
-section{padding:120px 24px 100px;position:relative;}
+section{padding:50px 24px 100px;position:relative;}
 .wrap{max-width:1080px;margin:0 auto;}
 
 ::selection{background:var(--primary);color:#fff;}
@@ -59,10 +59,6 @@ a:focus-visible, button:focus-visible{
   outline:2px solid var(--accent);
   outline-offset:3px;
   border-radius:4px;
-}
-
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
 }
 
 /* =========================================================
@@ -189,11 +185,13 @@ nav{
    HERO
 ========================================================= */
 .hero{
-  min-height:100vh;
+  min-height:92vh;
   display:flex;
   align-items:center;
-  padding-top:140px;
+  padding-top:120px;
+  padding-bottom:40px;
   background:
+    linear-gradient(to bottom, transparent 0%, transparent 62%, var(--bg) 100%),
     radial-gradient(600px 400px at 85% 15%, var(--primary-dim), transparent 60%),
     radial-gradient(500px 400px at 10% 85%, var(--accent-dim), transparent 60%);
 }
@@ -392,7 +390,7 @@ nav{
 /* =========================================================
    SKILLS
 ========================================================= */
-#skills{background:var(--bg-soft);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);}
+#skills{background:var(--bg);}
 .skills-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -440,7 +438,7 @@ nav{
   background:var(--bg);
   border:2px solid var(--primary);
 }
-.timeline-item.active .timeline-dot{background:var(--primary);box-shadow:0 0 0 4px var(--primary-dim);}
+/*.timeline-item.active .timeline-dot{background:var(--primary);box-shadow:0 0 0 4px var(--primary-dim);}*/
 .timeline-meta{
   display:flex;align-items:center;gap:10px;
   font-family:var(--mono);font-size:.72rem;color:var(--text-faint);
@@ -455,9 +453,63 @@ nav{
 .timeline-org{color:var(--accent);font-size:.85rem;margin-bottom:10px;display:block;}
 .timeline-item p{color:var(--text-muted);font-size:.92rem;}
 
+.timeline-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+.timeline-logo{
+  flex-shrink:0;
+  width:60px;height:60px;
+  display:flex;align-items:center;justify-content:center;
+}
+.timeline-logo img{width:90%;height:90%;object-fit:contain;}
+.timeline-header-text h3{margin-bottom:2px;}
+.timeline-header-text .timeline-org{margin-bottom:0;}
 /* =========================================================
    PROJECTS
 ========================================================= */
+.works-highlight{
+  position:relative;
+  display:inline-block;
+}
+
+.star-pop{
+  position:absolute;
+  display:block;
+  background:linear-gradient(135deg, #ffe066, #ffb300);
+  clip-path:polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  transform-origin:center;
+  animation:starTwinkle 3.1s ease-in-out infinite; /*setting kedipan bintang*/
+}
+.star-big{
+  width:20px;height:20px;
+  top:-12px;right:-6px;
+  animation-delay:0s;
+}
+.star-small{
+  width:11px;height:11px;
+  top:6px;right:-18px;
+  animation-delay:.5s;
+}
+@keyframes starTwinkle{
+  0%, 100%{
+    transform:scale(0.5) rotate(0deg);
+    opacity:.3;
+    filter:drop-shadow(0 0 0px #ffd54f);
+  }
+  50%{
+    transform:scale(1.25) rotate(15deg);
+    opacity:1;
+    filter:drop-shadow(0 0 8px #ffd54f);
+  }
+}
+
 .projects-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
@@ -673,10 +725,145 @@ nav{
 }
 
 /* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+.achievement-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:22px;
+}
+.achievement-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .25s ease, border-color .25s ease;
+}
+.achievement-card:hover{transform:translateY(-6px);border-color:var(--primary);}
+.achievement-img-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/3;
+  background:var(--surface-2);
+  overflow:hidden;
+}
+.achievement-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .3s ease;
+}
+.achievement-card:hover .achievement-img-wrap img{transform:scale(1.05);}
+.achievement-overlay{
+  position:absolute;inset:0;
+  background:rgba(8,8,15,.55);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.4rem;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+.achievement-card:hover .achievement-overlay{opacity:1;}
+.achievement-info{
+  padding:18px 20px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.achievement-logo--rounded{
+  border-radius:11px;
+  overflow:hidden;
+}
+.achievement-info .achievement-logo{
+  flex-shrink:0;
+  width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+}
+.achievement-info .achievement-logo img{width:100%;height:100%;object-fit:contain;}
+.achievement-info h3{font-family:var(--display);font-size:1.05rem;margin-bottom:4px;}
+.achievement-meta{font-family:var(--mono);font-size:.72rem;color:var(--text-muted);}
+
+/* Achievement lightbox modal */
+.ach-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(4,4,9,.82);
+  backdrop-filter:blur(6px);
+  display:none;
+  align-items:center;justify-content:center;
+  padding:24px;
+}
+.ach-overlay.open{display:flex;}
+.ach-modal{
+  width:100%;max-width:760px;max-height:88vh;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+  animation:pdxIn .25s cubic-bezier(.16,1,.3,1);
+}
+.ach-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  padding:20px 22px 14px;
+  border-bottom:1px solid var(--border-soft);
+}
+.ach-head-text .ach-eyebrow{
+  font-family:var(--mono);font-size:.68rem;color:var(--primary);
+  letter-spacing:.08em;margin-bottom:6px;display:block;
+}
+.ach-head-text h3{font-family:var(--display);font-size:1.2rem;}
+.ach-close{
+  flex-shrink:0;width:38px;height:38px;border-radius:12px;
+  background:var(--surface-2);border:1px solid var(--border);
+  color:var(--text-muted);font-size:.95rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s ease, color .2s ease;
+}
+.ach-close:hover{border-color:var(--accent);color:var(--accent);}
+.ach-stage{
+  position:relative;
+  background:var(--bg-soft);
+  margin:18px 22px 22px;
+  border-radius:14px;
+  border:1px solid var(--border-soft);
+  overflow:hidden;
+  aspect-ratio:4/3;
+  display:flex;align-items:center;justify-content:center;
+}
+.ach-stage img{width:100%;height:100%;object-fit:contain;background:var(--surface-2);}
+.ach-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(8,8,15,.65);
+  border:1px solid var(--border);
+  color:var(--text);font-size:.9rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:background .2s ease, border-color .2s ease;
+}
+.ach-nav:hover{background:var(--primary);border-color:var(--primary);}
+.ach-nav.prev{left:12px;}
+.ach-nav.next{right:12px;}
+.ach-counter{
+  position:absolute;bottom:10px;right:14px;
+  font-family:var(--mono);font-size:.7rem;color:var(--text-muted);
+  background:rgba(8,8,15,.65);
+  border:1px solid var(--border);
+  padding:4px 10px;border-radius:999px;
+}
+
+@media (max-width: 640px){
+  .ach-head{flex-direction:column;}
+  .ach-close{align-self:flex-end;}
+  .ach-stage{margin:14px 16px 16px;}
+}
+
+/* =========================================================
    CONTACT
 ========================================================= */
 #contact .wrap{max-width:900px;}
-.contact-hero{margin-bottom:40px;}
+.contact-hero{margin-bottom:40px;text-align:center;}
 .contact-hero h2{
   font-family:var(--display);font-weight:800;
   font-size:clamp(1.8rem,4vw,2.8rem);
@@ -684,8 +871,7 @@ nav{
   margin-bottom:16px;
 }
 .contact-hero h2 span{color:var(--primary);}
-.contact-hero p{color:var(--text-muted);max-width:480px;}
-
+.contact-hero p{color:var(--text-muted);max-width:480px;margin:0 auto;}
 .contact-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
@@ -748,6 +934,7 @@ footer{
     <a href="#skills"><i class="fa-solid fa-code"></i> Skills</a>
     <a href="#experience"><i class="fa-solid fa-briefcase"></i> Experience</a>
     <a href="#projects"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+    <a href="#achievements"><i class="fa-solid fa-award"></i> Achievements</a>
     <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
   </div>
 
@@ -759,7 +946,7 @@ footer{
 <section id="home" class="hero">
   <div class="hero-grid">
     <div>
-      <div class="badge-pill"><span class="dot"></span> Fresh Graduate · Terbuka untuk kerja &amp; kolaborasi · BSD, Tangerang</div>
+      <div class="badge-pill"><span class="dot"></span> Fresh Graduate · Open to work  &amp; collaboration · BSD, Tangerang</div>
       <h1>Ariel Diga<br><span class="line2">Arminda</span></h1>
       <p class="hero-role"><span id="typedRole"></span><span class="cursor">|</span></p>
       <div class="hero-actions">
@@ -818,51 +1005,63 @@ footer{
     <p class="section-sub">The combination of languages, frameworks, and tools I typically use, spanning from front-end to back-end.</p>
 
     <div class="skills-grid">
-      <div class="skill-card" data-skill="90">
+      <div class="skill-card">
         <div class="skill-top"><span class="skill-icon"><i class="devicon-javascript-plain colored"></i></span><h3>JavaScript</h3></div>
-        <div class="progress-bar"><span></span></div>
-        <div class="skill-meta"><span>WEB PROGRAMMING</span><span class="percent">0%</span></div>
+        <div class="skill-meta"><span>WEB PROGRAMMING</span></div>
       </div>
 
-      <div class="skill-card" data-skill="50">
+      <div class="skill-card">
         <div class="skill-top"><span class="skill-icon"><i class="devicon-react-original colored"></i></span><h3>React</h3></div>
-        <div class="progress-bar"><span></span></div>
-        <div class="skill-meta"><span>FRONT-END</span><span class="percent">0%</span></div>
+        <div class="skill-meta"><span>FRONT-END</span></div>
       </div>
 
-      <div class="skill-card" data-skill="90">
+      <div class="skill-card">
         <div class="skill-top"><span class="skill-icon"><i class="devicon-css3-plain colored"></i></span><h3>CSS</h3></div>
-        <div class="progress-bar"><span></span></div>
-        <div class="skill-meta"><span>STYLING</span><span class="percent">0%</span></div>
+        <div class="skill-meta"><span>STYLING</span></div>
       </div>
 
-      <div class="skill-card" data-skill="80">
+      <div class="skill-card">
         <div class="skill-top"><span class="skill-icon"><i class="devicon-nodejs-plain colored"></i></span><h3>Node.js</h3></div>
-        <div class="progress-bar"><span></span></div>
-        <div class="skill-meta"><span>JS RUNTIME</span><span class="percent">0%</span></div>
+        <div class="skill-meta"><span>JS RUNTIME</span></div>
       </div>
 
-      <div class="skill-card" data-skill="65">
+      <div class="skill-card">
         <div class="skill-top"><span class="skill-icon"><i class="devicon-figma-plain colored"></i></span><h3>UI/UX Design</h3></div>
-        <div class="progress-bar"><span></span></div>
-        <div class="skill-meta"><span>DESIGN</span><span class="percent">0%</span></div>
+        <div class="skill-meta"><span>DESIGN</span></div>
       </div>
 
-      <div class="skill-card" data-skill="80">
-        <div class="skill-top"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" style="width:1.7em;height:1.7em;"></span><h3>Database</h3></div>
-        <div class="progress-bar"><span></span></div>
-        <div class="skill-meta"><span>DATABASE</span><span class="percent">0%</span></div>
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" style="width:1.7em;height:1.7em;"></span><h3>PostgreSQL</h3></div>
+        <div class="skill-meta"><span>DATABASE</span></div>
       </div>
 
-      <div class="skill-card" data-skill="80">
+      <div class="skill-card">
         <div class="skill-top"><span class="skill-icon"><i class="devicon-laravel-plain colored"></i></span><h3>Laravel API</h3></div>
-        <div class="progress-bar"><span></span></div>
-        <div class="skill-meta"><span>BACKEND</span><span class="percent">0%</span></div>
+        <div class="skill-meta"><span>BACKEND</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="devicon-vscode-plain colored"></i></span><h3>Visual Studio Code</h3></div>
+        <div class="skill-meta"><span>TOOLS</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="fa-brands fa-github" style="color:#fff;"></i></span><h3>GitHub</h3></div>
+        <div class="skill-meta"><span>VERSION CONTROL</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="devicon-mongodb-plain colored"></i></span><h3>MongoDB</h3></div>
+        <div class="skill-meta"><span>DATABASE</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="devicon-mysql-plain colored"></i></span><h3>MySQL</h3></div>
+        <div class="skill-meta"><span>DATABASE</span></div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- ================= EXPERIENCE ================= -->
 <section id="experience">
   <div class="wrap">
@@ -873,16 +1072,39 @@ footer{
       <div class="timeline-item active">
         <div class="timeline-dot"></div>
         <div class="timeline-meta">2022 — 2026 <span class="tag">Education</span></div>
-        <h3>S1 Teknologi Informasi</h3>
-        <span class="timeline-org">Universitas Bina Sarana Informatika</span>
+        <div class="timeline-header">
+          <div class="timeline-logo"><img src="images/Education&Skills/Logo_BSI.png" alt="Logo Universitas Bina Sarana Informatika"></div>
+          <div class="timeline-header-text">
+            <h3>S1 Teknologi Informasi</h3>
+            <span class="timeline-org">Universitas Bina Sarana Informatika</span>
+          </div>
+        </div>
         <p>Focused on web application development and interactive technologies, with additional interests in information security and data processing.</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
+        <div class="timeline-meta">2019 — 2022 <span class="tag">Education</span></div>
+        <div class="timeline-header">
+          <div class="timeline-logo"><img src="images/Education&Skills/Logo_SMAN22.png" alt="Logo SMA Negeri 22"></div>
+          <div class="timeline-header-text">
+            <h3>SMA —MIPA</h3>
+            <span class="timeline-org">SMA Negeri 22 Kabupaten Tangerang</span>
+          </div>
+        </div>
+        <p>Studied Natural Sciences (MIPA), building a foundation in analytical and logical thinking before pursuing higher education in Information Technology.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
         <div class="timeline-meta">Sep 2025 — Des 2025 <span class="tag">Internship</span></div>
-        <h3>Software Engineer</h3>
-        <span class="timeline-org">PT Lautan Air Indonesia</span>
+        <div class="timeline-header">
+          <div class="timeline-logo"><img src="images/Education&Skills/Logo_LAI.png" alt="Logo PT Lautan Air Indonesia"></div>
+          <div class="timeline-header-text">
+            <h3>Software Engineer</h3>
+            <span class="timeline-org">PT Lautan Air Indonesia</span>
+          </div>
+        </div>
         <p>Developed web applications (Laravel, JavaScript, PostgreSQL, MongoDB) for requirements management and MQTT-based IoT monitoring, including API integration and performing quality control Quality Control roles.</p>
       </div>
     </div>
@@ -892,7 +1114,7 @@ footer{
 <!-- ================= PROJECTS ================= -->
 <section id="projects">
   <div class="wrap" style="margin-bottom:44px;">
-    <h2 class="section-heading">Showcase Of My Best <em>Works</em></h2>
+    <h2 class="section-heading">Showcase Of My Best <em class="works-highlight">Works<span class="star-pop star-big"></span><span class="star-pop star-small"></span></em></h2>
   </div>
 
   <div class="projects-grid">
@@ -906,20 +1128,14 @@ footer{
     </div>
 
     <div class="project-card">
-      <img class="project-img" src="images/menuutamasecurediary.png" alt="Tampilan Secure Notes App">
+      <img class="project-img" src="images/IOT_Portal.png" alt="Tampilan IOT Portal">
       <div class="project-info">
-        <h3>Secure Notes App</h3>
-        <p>Aplikasi catatan aman menggunakan algoritma AES dan Caesar cipher.</p>
-        <div class="tech-tags"><span>Flask</span><span>AES</span><span>HTML5</span></div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <img class="project-img" src="images/backendhotel.png" alt="Tampilan Aplikasi Pemesanan Tiket Hotel">
-      <div class="project-info">
-        <h3>Aplikasi Pemesanan Tiket Hotel</h3>
-        <p>Aplikasi web untuk membantu admin dan resepsionis mengelola pesanan konsumen di hotel secara offline.</p>
-        <div class="tech-tags"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
+        <h3>IOT Monitoring Portal</h3>
+        <p>A web-based monitoring portal for multi-vendor water quality sensor data (pH, COD, TSS, NH3N, etc), featuring a real-time dashboard, data filtering, and Excel export. Developed during an internship as a Software Engineer at PT Lautan Air Indonesia, and later became the foundation of my undergraduate thesis.</p>
+        <div class="tech-tags"><span>Laravel</span><span>PostgreSQL</span><span>JavaScript</span><span>Bootstrap</span></div>
+        <button type="button" class="project-detail-btn" data-project="iot-portal">
+          View Detail <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
       </div>
     </div>
 
@@ -942,7 +1158,6 @@ footer{
   <div class="pdx-modal" role="dialog" aria-modal="true" aria-labelledby="pdxTitle">
     <div class="pdx-head">
       <div class="pdx-head-text">
-        <span class="pdx-eyebrow">DETAIL PROYEK</span>
         <h3 id="pdxTitle"></h3>
         <p id="pdxDesc"></p>
       </div>
@@ -959,6 +1174,64 @@ footer{
     </div>
 
     <div class="pdx-thumbs" id="pdxThumbs"></div>
+  </div>
+</div>
+
+<!-- ================= ACHIEVEMENTS ================= -->
+<section id="achievements">
+  <div class="wrap">
+    <h2 class="section-heading">My <em>Achievements</em></h2>
+    <p class="section-sub">Certifications and programs I've completed to sharpen my skills.</p>
+
+    <div class="achievement-grid">
+      <div class="achievement-card" data-achievement="0">
+        <div class="achievement-img-wrap">
+          <img src="images/achievement/MTCNA.png" alt="Sertifikat MTCNA">
+          <div class="achievement-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="achievement-info">
+          <div class="achievement-logo achievement-logo--rounded"><img src="images/achievement/Logo-MTCNA.png" alt="Logo MTCNA"></div>
+          <div>
+            <h3>MTCNA</h3>
+            <span class="achievement-meta">MikroTik Certified Network Associate</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="achievement-card" data-achievement="1">
+        <div class="achievement-img-wrap">
+          <img src="images/achievement/Analisis_Program.png" alt="Sertifikat Analisis Program">
+          <div class="achievement-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="achievement-info">
+          <div class="achievement-logo"><img src="images/achievement/Logo-LSPBSI.png" alt="Logo LSP BSI"></div>
+          <div>
+            <h3>Analisis Program</h3>
+            <span class="achievement-meta">Lembaga Sertifikasi Profesi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACHIEVEMENT LIGHTBOX ================= -->
+<div class="ach-overlay" id="achOverlay" aria-hidden="true">
+  <div class="ach-modal" role="dialog" aria-modal="true" aria-labelledby="achTitle">
+    <div class="ach-head">
+      <div class="ach-head-text">
+        <span class="ach-eyebrow">CERTIFICATE</span>
+        <h3 id="achTitle"></h3>
+      </div>
+      <button type="button" class="ach-close" id="achClose" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="ach-stage">
+      <button type="button" class="ach-nav prev" id="achPrev" aria-label="Sertifikat sebelumnya"><i class="fa-solid fa-chevron-left"></i></button>
+      <img id="achImage" src="" alt="">
+      <button type="button" class="ach-nav next" id="achNext" aria-label="Sertifikat berikutnya"><i class="fa-solid fa-chevron-right"></i></button>
+      <span class="ach-counter" id="achCounter"></span>
+    </div>
   </div>
 </div>
 
@@ -984,11 +1257,6 @@ footer{
         <div class="icon"><i class="fa-brands fa-linkedin-in"></i></div>
         <div><span class="label">LINKEDIN</span><span class="value">Ariel Diga Arminda</span></div>
       </a>
-
-      <div class="contact-card">
-        <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
-        <div><span class="label">LOKASI</span><span class="value">BSD, Kab. Tangerang</span></div>
-      </div>
     </div>
   </div>
 </section>
@@ -1035,24 +1303,11 @@ setInterval(() => {
   cursorEl.style.opacity = cursorEl.style.opacity === '0' ? '1' : '0';
 }, 500);
 
-// ---------- skill bars + reveal on scroll ----------
+// ---------- reveal on scroll ----------
 const io = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if(entry.isIntersecting){
       entry.target.classList.add('in');
-      if(entry.target.classList.contains('skill-card')){
-        const target = parseInt(entry.target.getAttribute('data-skill'));
-        const barEl = entry.target.querySelector('.progress-bar span');
-        const percentEl = entry.target.querySelector('.percent');
-        barEl.style.width = target + '%';
-        let count = 0;
-        const step = Math.max(1, Math.round(target / 40));
-        const timer = setInterval(() => {
-          count += step;
-          if(count >= target){ count = target; clearInterval(timer); }
-          percentEl.textContent = count + '%';
-        }, 20);
-      }
       io.unobserve(entry.target);
     }
   });
@@ -1068,7 +1323,7 @@ document.querySelectorAll('.skill-card, .reveal').forEach(el => io.observe(el));
 const projectDetails = {
   "ticket-complaint": {
     title: "Ticket Complaint System",
-    description: "Sistem manajemen tiket keluhan pelanggan dengan dashboard analitik, NCR tracking, dan notifikasi email. Dibuat saat menjalani magang sebagai Software Engineer di PT Lautan Air Indonesia.",
+    description: "A customer complaint ticketing management system featuring an analytics dashboard, NCR tracking, and email notifications. Developed during an internship as a Software Engineer at PT Lautan Air Indonesia.",
     tags: ["Laravel", "PHP", "JavaScript", "PostgreSQL", "Bootstrap"],
     images: [
       "images/Ticket_Complaint/ticket_complaint2.png",
@@ -1080,6 +1335,19 @@ const projectDetails = {
       "images/Ticket_Complaint/ticket_complaint8.png",
       "images/Ticket_Complaint/ticket_complaint9.png",
       "images/Ticket_Complaint/ticket_complaint10.png"
+    ]
+  },
+  "iot-portal": {
+    title: "IOT Monitoring Portal",
+    description: "A web-based monitoring portal for multi-vendor water quality sensor data (pH, COD, TSS, NH3N, etc), featuring a real-time dashboard, data filtering, and Excel export. Developed during an internship as a Software Engineer at PT Lautan Air Indonesia, and later became the foundation of my undergraduate thesis.",
+    tags: ["Laravel", "PostgreSQL", "JavaScript", "Bootstrap"],
+    images: [
+      "images/IOT_Portal/IOT_Portal1.png",
+      "images/IOT_Portal/IOT_Portal2.png",
+      "images/IOT_Portal/IOT_Portal3.png",
+      "images/IOT_Portal/IOT_Portal4.png",
+      "images/IOT_Portal/IOT_Portal5.png",
+      "images/IOT_Portal/IOT_Portal6.png"
     ]
   }
 };
@@ -1171,6 +1439,71 @@ document.querySelectorAll('.project-detail-btn').forEach(btn => {
 pdxClose.addEventListener('click', closeProjectDetail);
 pdxNext.addEventListener('click', showNext);
 pdxPrev.addEventListener('click', showPrev);
+
+// =========================================================
+// ACHIEVEMENTS LIGHTBOX
+// Tambah sertifikat baru cukup nambah objek baru di array ini.
+// =========================================================
+const achievements = [
+  { title: "MTCNA", image: "images/achievement/MTCNA.png" },
+  { title: "Analisis Program", image: "images/achievement/Analisis_Program.png" }
+];
+
+const achOverlay = document.getElementById('achOverlay');
+const achTitle = document.getElementById('achTitle');
+const achImage = document.getElementById('achImage');
+const achCounter = document.getElementById('achCounter');
+const achPrev = document.getElementById('achPrev');
+const achNext = document.getElementById('achNext');
+const achClose = document.getElementById('achClose');
+
+let achIndex = 0;
+let achLastFocused = null;
+
+function renderAch(){
+  const item = achievements[achIndex];
+  achTitle.textContent = item.title;
+  achImage.src = item.image;
+  achImage.alt = 'Sertifikat ' + item.title;
+  achCounter.textContent = (achIndex + 1) + ' / ' + achievements.length;
+}
+
+function openAchievement(index, triggerEl){
+  achIndex = index;
+  achLastFocused = triggerEl || document.activeElement;
+  renderAch();
+  achOverlay.classList.add('open');
+  achOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  achClose.focus();
+}
+
+function closeAchievement(){
+  achOverlay.classList.remove('open');
+  achOverlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if(achLastFocused) achLastFocused.focus();
+}
+
+document.querySelectorAll('.achievement-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const idx = parseInt(card.getAttribute('data-achievement'));
+    openAchievement(idx, card);
+  });
+});
+
+achClose.addEventListener('click', closeAchievement);
+achNext.addEventListener('click', () => { achIndex = (achIndex + 1) % achievements.length; renderAch(); });
+achPrev.addEventListener('click', () => { achIndex = (achIndex - 1 + achievements.length) % achievements.length; renderAch(); });
+
+achOverlay.addEventListener('click', (e) => { if(e.target === achOverlay) closeAchievement(); });
+
+document.addEventListener('keydown', (e) => {
+  if(!achOverlay.classList.contains('open')) return;
+  if(e.key === 'Escape') closeAchievement();
+  if(e.key === 'ArrowRight'){ achIndex = (achIndex + 1) % achievements.length; renderAch(); }
+  if(e.key === 'ArrowLeft'){ achIndex = (achIndex - 1 + achievements.length) % achievements.length; renderAch(); }
+});
 
 pdxOverlay.addEventListener('click', (e) => {
   if(e.target === pdxOverlay) closeProjectDetail();
