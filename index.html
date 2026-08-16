@@ -150,15 +150,15 @@ nav{
 
 .nav-cta{
   padding:10px 20px;
-  border-radius:999px;
-  background:var(--primary);
-  color:#fff;
+  border-radius:10px;
+  background:#fff;
+  color:#0a0a12;
   font-size:.82rem;
   font-weight:600;
   display:flex;align-items:center;gap:8px;
-  transition:transform .2s ease, box-shadow .2s ease;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--primary-dim);}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,255,255,.25);background:#f0f0f5;}
 
 .nav-toggle{
   display:none;
@@ -944,7 +944,7 @@ footer{
     <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
   </div>
 
-  <a href="#contact" class="nav-cta">Hubungi Saya <i class="fa-solid fa-arrow-right"></i></a>
+  <a href="CV/CV_Ariel_Diga_Arminda.pdf" download target="_blank" rel="noopener" class="nav-cta">Download CV <i class="fa-solid fa-download"></i></a>
   <button class="nav-toggle" id="navToggle" aria-label="Buka menu"><i class="fa-solid fa-bars"></i></button>
 </nav>
 
@@ -956,8 +956,8 @@ footer{
       <h1>Ariel Diga<br><span class="line2">Arminda</span></h1>
       <p class="hero-role"><span id="typedRole"></span><span class="cursor">|</span></p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Hubungi Saya <i class="fa-solid fa-arrow-right"></i></a>
-        <a href="#about" class="btn btn-ghost">Tentang Saya <i class="fa-solid fa-arrow-down"></i></a>
+        <a href="#contact" class="btn btn-primary">Contact me <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#about" class="btn btn-ghost">About me <i class="fa-solid fa-arrow-down"></i></a>
       </div>
     </div>
 
