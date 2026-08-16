@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ariel Diga Arminda — Full Stack Developer</title>
+<title>Ariel Diga Arminda — Portofolio</title>
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -182,9 +182,23 @@ nav{
   }
   .nav-links.open{display:flex;}
   .nav-links a{padding:12px 16px;}
-  .nav-cta{display:none;}
+  .nav-cta-group{display:none;}
   .nav-toggle{display:block;}
 }
+.nav-cta-group{display:flex;align-items:center;gap:10px;}
+.lang-toggle{
+  padding:10px 14px;
+  border-radius:10px;
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text);
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:.78rem;
+  cursor:pointer;
+  transition:border-color .2s ease, color .2s ease;
+}
+.lang-toggle:hover{border-color:var(--primary);color:var(--primary);}
 
 /* =========================================================
    HERO
@@ -935,16 +949,19 @@ footer{
   </div>
 
   <div class="nav-links" id="navLinks">
-    <a href="#home" class="active"><i class="fa-solid fa-house"></i> Home</a>
-    <a href="#about"><i class="fa-solid fa-user"></i> About</a>
-    <a href="#skills"><i class="fa-solid fa-code"></i> Skills</a>
-    <a href="#experience"><i class="fa-solid fa-briefcase"></i> Experience</a>
-    <a href="#projects"><i class="fa-solid fa-diagram-project"></i> Projects</a>
-    <a href="#achievements"><i class="fa-solid fa-award"></i> Achievements</a>
-    <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <a href="#home" class="active"><i class="fa-solid fa-house"></i> <span data-i18n-en="Home" data-i18n-id="Beranda">Home</span></a>
+    <a href="#about"><i class="fa-solid fa-user"></i> <span data-i18n-en="About" data-i18n-id="Tentang">About</span></a>
+    <a href="#skills"><i class="fa-solid fa-code"></i> <span data-i18n-en="Skills" data-i18n-id="Keahlian">Skills</span></a>
+    <a href="#experience"><i class="fa-solid fa-briefcase"></i> <span data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</span></a>
+    <a href="#projects"><i class="fa-solid fa-diagram-project"></i> <span data-i18n-en="Projects" data-i18n-id="Proyek">Projects</span></a>
+    <a href="#achievements"><i class="fa-solid fa-award"></i> <span data-i18n-en="Achievements" data-i18n-id="Pencapaian">Achievements</span></a>
+    <a href="#contact"><i class="fa-solid fa-envelope"></i> <span data-i18n-en="Contact" data-i18n-id="Kontak">Contact</span></a>
   </div>
 
-  <a href="CV/CV_Ariel_Diga_Arminda.pdf" download target="_blank" rel="noopener" class="nav-cta">Download CV <i class="fa-solid fa-download"></i></a>
+  <div class="nav-cta-group">
+    <button type="button" id="langToggle" class="lang-toggle" aria-label="Switch language">ID</button>
+    <a href="CV/CV_Ariel_Diga_Arminda.pdf" download target="_blank" rel="noopener" class="nav-cta">Download CV <i class="fa-solid fa-download"></i></a>
+  </div>
   <button class="nav-toggle" id="navToggle" aria-label="Buka menu"><i class="fa-solid fa-bars"></i></button>
 </nav>
 
@@ -952,12 +969,12 @@ footer{
 <section id="home" class="hero">
   <div class="hero-grid">
     <div>
-      <div class="badge-pill"><span class="dot"></span> Fresh Graduate · Open to work  &amp; collaboration · BSD, Tangerang</div>
+      <div class="badge-pill"><span class="dot"></span> <span data-i18n-en="Fresh Graduate · Open to work &amp; collaboration · BSD, Tangerang" data-i18n-id="Fresh Graduate · Terbuka untuk kerja &amp; kolaborasi · BSD, Tangerang">Fresh Graduate · Open to work &amp; collaboration · BSD, Tangerang</span></div>
       <h1>Ariel Diga<br><span class="line2">Arminda</span></h1>
       <p class="hero-role"><span id="typedRole"></span><span class="cursor">|</span></p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Contact me <i class="fa-solid fa-arrow-right"></i></a>
-        <a href="#about" class="btn btn-ghost">About me <i class="fa-solid fa-arrow-down"></i></a>
+        <a href="#contact" class="btn btn-primary"><span data-i18n-en="Contact me" data-i18n-id="Hubungi saya">Contact me</span> <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#about" class="btn btn-ghost"><span data-i18n-en="About me" data-i18n-id="Tentang saya">About me</span> <i class="fa-solid fa-arrow-down"></i></a>
       </div>
     </div>
 
@@ -970,7 +987,7 @@ footer{
       <div class="orbit-badge b2"><i class="devicon-laravel-plain colored"></i></div>
       <div class="orbit-badge b3"><i class="devicon-react-original colored"></i></div>
       <div class="orbit-badge b4"><i class="devicon-nodejs-plain colored"></i></div>
-      <div class="hero-tag"><span class="dot"></span> WEB DEVELOPER</div>
+      <div class="hero-tag"><span class="dot"></span> <span data-i18n-en="WEB DEVELOPER" data-i18n-id="PENGEMBANG WEB">WEB DEVELOPER</span></div>
     </div>
   </div>
 </section>
@@ -978,9 +995,9 @@ footer{
 <!-- ================= ABOUT ================= -->
 <section id="about">
   <div class="wrap">
-    <h2 class="section-heading">About <em>Me</em></h2>
+    <h2 class="section-heading" data-i18n-en="About <em>Me</em>" data-i18n-id="Tentang <em>Saya</em>">About <em>Me</em></h2>
       <div class="about-text reveal">
-        <p>I am an Information Technology student at Bina Sarana Informatika with a strong interest in web development. I have four months of experience as a Software Engineer and enjoy building websites that serve as beautiful, functional digital solutions.</p>
+        <p data-i18n-en="I am an Information Technology student at Bina Sarana Informatika with a strong interest in web development. I have four months of experience as a Software Engineer and enjoy building websites that serve as beautiful, functional digital solutions." data-i18n-id="Saya adalah mahasiswa Teknologi Informasi di Bina Sarana Informatika dengan minat besar pada pengembangan web. Saya memiliki pengalaman empat bulan sebagai Software Engineer dan senang membangun website yang menjadi solusi digital yang indah dan fungsional.">I am an Information Technology student at Bina Sarana Informatika with a strong interest in web development. I have four months of experience as a Software Engineer and enjoy building websites that serve as beautiful, functional digital solutions.</p>
 
         <div class="tag-row">
           <span>#Web Developer</span>
@@ -1267,7 +1284,7 @@ footer{
   </div>
 </section>
 
-<footer>&copy; 2026 Ariel Diga Arminda.</footer>
+<footer>&copy; 2026 Ariel Diga Arminda. all rights reserved</footer>
 
 <script>
 // ---------- mobile nav toggle ----------
@@ -1289,19 +1306,66 @@ const setActive = () => {
 window.addEventListener('scroll', setActive);
 setActive();
 
+// =========================================================
+// LANGUAGE TOGGLE (EN <-> ID)
+// =========================================================
+let currentLang = localStorage.getItem('site-lang') || 'en';
+
+function applyStaticTranslations(lang){
+  document.querySelectorAll('[data-i18n-en]').forEach(el => {
+    const text = lang === 'id' ? el.getAttribute('data-i18n-id') : el.getAttribute('data-i18n-en');
+    if(text !== null) el.innerHTML = text;
+  });
+}
+
 // ---------- typed tagline effect (types once, slower speed) ----------
-const taglineText = "I help businesses and individuals turn ideas into beautiful, functional digital solutions";
+const heroTagline = {
+  en: "I help businesses and individuals turn ideas into beautiful, functional digital solutions",
+  id: "Saya membantu bisnis dan individu mengubah ide menjadi solusi digital yang indah dan fungsional"
+};
 const typedEl = document.getElementById('typedRole');
 const cursorEl = document.querySelector('.hero-role .cursor');
 let ci = 0;
+let typingTimeout = null;
 
 function typeOnce(){
+  const text = heroTagline[currentLang];
   ci++;
-  typedEl.textContent = taglineText.slice(0, ci);
-  if(ci < taglineText.length){
-    setTimeout(typeOnce, 55);
+  typedEl.textContent = text.slice(0, ci);
+  if(ci < text.length){
+    typingTimeout = setTimeout(typeOnce, 55);
   }
 }
+
+function restartTyping(){
+  clearTimeout(typingTimeout);
+  ci = 0;
+  typedEl.textContent = '';
+  typeOnce();
+}
+
+const langToggle = document.getElementById('langToggle');
+
+function setLanguage(lang){
+  currentLang = lang;
+  localStorage.setItem('site-lang', lang);
+  document.documentElement.lang = lang;
+  applyStaticTranslations(lang);
+  langToggle.textContent = lang === 'en' ? 'ID' : 'EN';
+  restartTyping();
+
+  if(currentProject){
+    pdxDesc.textContent = projectDetails[currentProject].description[lang];
+  }
+}
+
+langToggle.addEventListener('click', () => {
+  setLanguage(currentLang === 'en' ? 'id' : 'en');
+});
+
+// init: apply saved language on load
+applyStaticTranslations(currentLang);
+langToggle.textContent = currentLang === 'en' ? 'ID' : 'EN';
 typeOnce();
 
 // cursor blink dikontrol manual biar tidak ikut ke-reset saat teks berubah
