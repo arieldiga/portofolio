@@ -312,7 +312,7 @@ nav{
 }
 .orbit-track.t1{ width:112%; height:112%; animation:orbitSpin 9s  linear infinite; }
 .orbit-track.t2{ width:128%; height:128%; animation:orbitSpin 13s linear infinite; }
-.orbit-track.t3{ width:144%; height:144%; animation:orbitSpin 18s linear infinite reverse; }
+.orbit-track.t3{ width:144%; height:144%; animation:orbitSpin 18s linear infinite; }
 .orbit-track.t4{ width:160%; height:160%; animation:orbitSpin 24s linear infinite; }
 
 .orbit-badge{
@@ -321,17 +321,14 @@ nav{
   width:46px;height:46px;
   margin-top:-23px;
   margin-left:-23px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:14px;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;
-  box-shadow:0 8px 20px rgba(0,0,0,.4);
+  font-size:1.6rem;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.5));
   pointer-events:auto;
 }
 .orbit-track.t1 .orbit-badge{ animation:orbitCounterSpin 9s  linear infinite; }
 .orbit-track.t2 .orbit-badge{ animation:orbitCounterSpin 13s linear infinite; }
-.orbit-track.t3 .orbit-badge{ animation:orbitCounterSpin 18s linear infinite reverse; }
+.orbit-track.t3 .orbit-badge{ animation:orbitCounterSpin 18s linear infinite; }
 .orbit-track.t4 .orbit-badge{ animation:orbitCounterSpin 24s linear infinite; }
 
 @keyframes orbitSpin{
