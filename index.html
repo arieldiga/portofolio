@@ -302,20 +302,46 @@ nav{
   box-shadow:0 20px 60px rgba(134,87,255,.25);
 }
 .hero-photo img{width:100%;height:100%;object-fit:cover;}
+.orbit-track{
+  position:absolute;
+  top:50%;left:50%;
+  border:1px dashed var(--border-soft);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.orbit-track.t1{ width:112%; height:112%; animation:orbitSpin 9s  linear infinite; }
+.orbit-track.t2{ width:128%; height:128%; animation:orbitSpin 13s linear infinite; }
+.orbit-track.t3{ width:144%; height:144%; animation:orbitSpin 18s linear infinite reverse; }
+.orbit-track.t4{ width:160%; height:160%; animation:orbitSpin 24s linear infinite; }
+
 .orbit-badge{
   position:absolute;
+  top:0;left:50%;
   width:46px;height:46px;
+  margin-top:-23px;
+  margin-left:-23px;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:14px;
   display:flex;align-items:center;justify-content:center;
   font-size:1.2rem;
   box-shadow:0 8px 20px rgba(0,0,0,.4);
+  pointer-events:auto;
 }
-.orbit-badge.b1{top:6px;left:-8px;}
-.orbit-badge.b2{top:36%;right:-24px;}
-.orbit-badge.b3{bottom:14%;left:-24px;}
-.orbit-badge.b4{bottom:0;right:14px;}
+.orbit-track.t1 .orbit-badge{ animation:orbitCounterSpin 9s  linear infinite; }
+.orbit-track.t2 .orbit-badge{ animation:orbitCounterSpin 13s linear infinite; }
+.orbit-track.t3 .orbit-badge{ animation:orbitCounterSpin 18s linear infinite reverse; }
+.orbit-track.t4 .orbit-badge{ animation:orbitCounterSpin 24s linear infinite; }
+
+@keyframes orbitSpin{
+  from{transform:translate(-50%,-50%) rotate(0deg);}
+  to{transform:translate(-50%,-50%) rotate(360deg);}
+}
+@keyframes orbitCounterSpin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(-360deg);}
+}
 .hero-tag{
   position:absolute;
   bottom:-6px;left:50%;
@@ -983,11 +1009,21 @@ footer{
       <div class="hero-photo">
         <img src="images/me.jpg" alt="Foto Ariel Diga Arminda">
       </div>
-      <div class="orbit-badge b1"><i class="devicon-javascript-plain colored"></i></div>
-      <div class="orbit-badge b2"><i class="devicon-laravel-plain colored"></i></div>
-      <div class="orbit-badge b3"><i class="devicon-react-original colored"></i></div>
-      <div class="orbit-badge b4"><i class="devicon-nodejs-plain colored"></i></div>
-      <div class="hero-tag"><span class="dot"></span> <span data-i18n-en="WEB DEVELOPER" data-i18n-id="PENGEMBANG WEB">WEB DEVELOPER</span></div>
+    
+      <div class="orbit-track t1">
+        <div class="orbit-badge"><i class="devicon-javascript-plain colored"></i></div>
+      </div>
+      <div class="orbit-track t2">
+        <div class="orbit-badge"><i class="devicon-laravel-plain colored"></i></div>
+      </div>
+      <div class="orbit-track t3">
+        <div class="orbit-badge"><i class="devicon-vscode-plain colored"></i></div>
+      </div>
+      <div class="orbit-track t4">
+        <div class="orbit-badge"><i class="fa-brands fa-github" style="color:#fff;"></i></div>
+      </div>
+    
+      <div class="hero-tag"><span class="dot"></span> WEB DEVELOPER</div>
     </div>
   </div>
 </section>
