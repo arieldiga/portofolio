@@ -774,24 +774,26 @@ nav{
   overflow:hidden;
   width:100%;
   position:relative;
+  cursor:grab;
   -webkit-mask-image:linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
   mask-image:linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+.achievement-carousel.dragging{
+  cursor:grabbing;
 }
 .achievement-track{
   display:flex;
   gap:22px;
   width:max-content;
-  animation:achScroll 24s linear infinite;
-}
-.achievement-track.paused{
-  animation-play-state:paused;
+  will-change:transform;
 }
 .achievement-card{
   flex:0 0 300px;
+  user-select:none;
+  -webkit-user-select:none;
 }
-@keyframes achScroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
+.achievement-carousel.dragging .achievement-card{
+  pointer-events:none;
 }
 .achievement-card{
   background:var(--surface);
@@ -1704,36 +1706,104 @@ document.addEventListener('keydown', (e) => {
   if(e.key === 'ArrowLeft') showPrev();
 });
 
-// ---------- achievements auto-slide carousel ----------
+// ---------- achievements auto-slide carousel (with manual drag) ----------
 const achTrack = document.getElementById('achievementTrack');
 if(achTrack){
-  // duplikasi semua card biar animasi looping mulus tanpa putus
+  const achCarousel = achTrack.parentElement;
+
+  // duplikasi semua card biar looping mulus tanpa putus
   const originalAchCards = Array.from(achTrack.children);
   originalAchCards.forEach(card => {
     const clone = card.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
     clone.setAttribute('tabindex', '-1');
     clone.addEventListener('click', () => {
+      if(achDragMoved) return; // jangan buka lightbox kalau habis drag
       const idx = parseInt(clone.getAttribute('data-achievement'));
       openAchievement(idx, clone);
     });
     achTrack.appendChild(clone);
   });
+  // pasang ulang listener klik untuk card asli juga, biar konsisten cek achDragMoved
+  originalAchCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if(achDragMoved) e.stopImmediatePropagation();
+    }, true);
+  });
 
-  let achPauseTimeout = null;
-  function pauseAchCarousel(){
-    clearTimeout(achPauseTimeout);
-    achTrack.classList.add('paused');
+  let achPos = 0;            // posisi geser saat ini (px, negatif = geser ke kiri)
+  let achSpeed = 0.4;        // kecepatan auto-slide (px per frame)
+  let achPaused = false;     // true saat hover/sentuh/drag
+  let achResumeTimeout = null;
+  let achHalfWidth = 0;      // lebar 1 set asli (buat looping)
+
+  let isDown = false;
+  let startX = 0;
+  let startPos = 0;
+  let achDragMoved = false;
+
+  function measure(){
+    achHalfWidth = achTrack.scrollWidth / 2;
   }
-  function resumeAchCarousel(delay){
-    clearTimeout(achPauseTimeout);
-    achPauseTimeout = setTimeout(() => achTrack.classList.remove('paused'), delay);
+  measure();
+  window.addEventListener('resize', measure);
+
+  function tick(){
+    if(!achPaused && !isDown){
+      achPos -= achSpeed;
+    }
+    // loop: kalau sudah geser sejauh 1 set penuh, reset tanpa kelihatan patah
+    if(achPos <= -achHalfWidth) achPos += achHalfWidth;
+    if(achPos > 0) achPos -= achHalfWidth;
+    achTrack.style.transform = `translateX(${achPos}px)`;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function pauseAch(){
+    clearTimeout(achResumeTimeout);
+    achPaused = true;
+  }
+  function resumeAchAfter(delay){
+    clearTimeout(achResumeTimeout);
+    achResumeTimeout = setTimeout(() => { achPaused = false; }, delay);
   }
 
-  achTrack.addEventListener('mouseenter', pauseAchCarousel);
-  achTrack.addEventListener('mouseleave', () => resumeAchCarousel(800));
-  achTrack.addEventListener('touchstart', pauseAchCarousel, { passive:true });
-  achTrack.addEventListener('touchend', () => resumeAchCarousel(3000));
+  function dragStart(clientX){
+    isDown = true;
+    achDragMoved = false;
+    startX = clientX;
+    startPos = achPos;
+    achCarousel.classList.add('dragging');
+    pauseAch();
+  }
+  function dragMove(clientX){
+    if(!isDown) return;
+    const delta = clientX - startX;
+    if(Math.abs(delta) > 4) achDragMoved = true;
+    achPos = startPos + delta;
+  }
+  function dragEnd(){
+    if(!isDown) return;
+    isDown = false;
+    achCarousel.classList.remove('dragging');
+    resumeAchAfter(1200);
+    setTimeout(() => { achDragMoved = false; }, 50);
+  }
+
+  // mouse
+  achCarousel.addEventListener('mousedown', (e) => { dragStart(e.clientX); e.preventDefault(); });
+  window.addEventListener('mousemove', (e) => dragMove(e.clientX));
+  window.addEventListener('mouseup', dragEnd);
+
+  // touch
+  achCarousel.addEventListener('touchstart', (e) => dragStart(e.touches[0].clientX), { passive:true });
+  achCarousel.addEventListener('touchmove', (e) => dragMove(e.touches[0].clientX), { passive:true });
+  achCarousel.addEventListener('touchend', dragEnd);
+
+  // hover pause (desktop, tanpa drag)
+  achCarousel.addEventListener('mouseenter', pauseAch);
+  achCarousel.addEventListener('mouseleave', () => { if(!isDown) resumeAchAfter(800); });
 }
 </script>
 
