@@ -555,8 +555,9 @@ nav{
 
 .projects-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(270px,340px));
   gap:22px;
+  justify-content:center;
 }
 .project-card{
   background:var(--surface);
@@ -605,7 +606,6 @@ nav{
 .project-detail-btn i{font-size:.72rem;transition:transform .2s ease;}
 .project-detail-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-dim);}
 .project-detail-btn:hover i{transform:translateX(2px);}
-
 /* =========================================================
    PROJECT DETAIL MODAL / GALLERY
 ========================================================= */
@@ -770,10 +770,28 @@ nav{
 /* =========================================================
    ACHIEVEMENTS
 ========================================================= */
-.achievement-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+.achievement-carousel{
+  overflow:hidden;
+  width:100%;
+  position:relative;
+  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  mask-image:linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+.achievement-track{
+  display:flex;
   gap:22px;
+  width:max-content;
+  animation:achScroll 24s linear infinite;
+}
+.achievement-track.paused{
+  animation-play-state:paused;
+}
+.achievement-card{
+  flex:0 0 300px;
+}
+@keyframes achScroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
 }
 .achievement-card{
   background:var(--surface);
@@ -825,7 +843,6 @@ nav{
 .achievement-info .achievement-logo img{width:100%;height:100%;object-fit:contain;}
 .achievement-info h3{font-family:var(--display);font-size:1.05rem;margin-bottom:4px;}
 .achievement-meta{font-family:var(--mono);font-size:.72rem;color:var(--text-muted);}
-
 /* Achievement lightbox modal */
 .ach-overlay{
   position:fixed;inset:0;z-index:2000;
@@ -1115,6 +1132,36 @@ footer{
         <div class="skill-top"><span class="skill-icon"><i class="devicon-mysql-plain colored"></i></span><h3>MySQL</h3></div>
         <div class="skill-meta"><span>DATABASE</span></div>
       </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="fa-solid fa-diagram-project" style="color:#f08705;"></i></span><h3>Draw.io</h3></div>
+        <div class="skill-meta"><span>DIAGRAMMING / ANALYSIS</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" style="width:1.7em;height:1.7em;filter:invert(1);"></span><h3>Next.js</h3></div>
+        <div class="skill-meta"><span>FRONT-END</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="devicon-nuxtjs-plain colored"></i></span><h3>Nuxt.js</h3></div>
+        <div class="skill-meta"><span>FRONT-END</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="devicon-go-original-wordmark colored"></i></span><h3>Golang</h3></div>
+        <div class="skill-meta"><span>BACKEND (Self Learning Process)</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="devicon-php-plain colored"></i></span><h3>PHP</h3></div>
+        <div class="skill-meta"><span>BACKEND</span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-top"><span class="skill-icon"><i class="devicon-bootstrap-plain colored"></i></span><h3>Bootstrap</h3></div>
+        <div class="skill-meta"><span>STYLING</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1239,8 +1286,9 @@ footer{
     <h2 class="section-heading" data-i18n-en="My <em>Achievements</em>" data-i18n-id="<em>Pencapaian</em> Saya">My <em>Achievements</em></h2>
     <p class="section-sub" data-i18n-en="Certifications and programs I've completed to sharpen my skills." data-i18n-id="Sertifikasi dan program yang telah saya selesaikan untuk mengasah kemampuan saya.">Certifications and programs I've completed to sharpen my skills.</p>
 
-    <div class="achievement-grid">
-      <div class="achievement-card" data-achievement="0">
+    <div class="achievement-carousel">
+      <div class="achievement-track" id="achievementTrack">
+        <div class="achievement-card" data-achievement="0">
         <div class="achievement-img-wrap">
           <img src="images/achievement/MTCNA.png" alt="Sertifikat MTCNA">
           <div class="achievement-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
@@ -1267,8 +1315,37 @@ footer{
           </div>
         </div>
       </div>
+
+      <div class="achievement-card" data-achievement="2">
+        <div class="achievement-img-wrap">
+          <img src="images/achievement/Kegiatan_Mahasiswa.png" alt="Sertifikat Seminar Akselerasi Transformasi Digital">
+          <div class="achievement-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="achievement-info">
+          <div class="achievement-logo"><img src="images/Education&Skills/Logo_BSI.png" alt="Logo Universitas Bina Sarana Informatika"></div>
+          <div>
+            <h3>Seminar Transformasi Digital</h3>
+            <span class="achievement-meta">Akselerasi Transformasi Digital Untuk Mendukung Ekonomi Kreatif</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="achievement-card" data-achievement="3">
+        <div class="achievement-img-wrap">
+          <img src="images/achievement/Toefl.png" alt="Sertifikat TOEFL Prediction Test">
+          <div class="achievement-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="achievement-info">
+          <div class="achievement-logo achievement-logo--rounded"><img src="images/achievement/Logo-Toefl.jpg" alt="Logo Lembaga Bahasa UBSI"></div>
+          <div>
+            <h3>TOEFL Prediction Test</h3>
+            <span class="achievement-meta">Skor 630 · Lembaga Bahasa UBSI</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 </section>
 
 <!-- ================= ACHIEVEMENT LIGHTBOX ================= -->
@@ -1555,7 +1632,9 @@ pdxPrev.addEventListener('click', showPrev);
 // =========================================================
 const achievements = [
   { title: "MTCNA", image: "images/achievement/MTCNA.png" },
-  { title: "Analisis Program", image: "images/achievement/Analisis_Program.png" }
+  { title: "Analisis Program", image: "images/achievement/Analisis_Program.png" },
+  { title: "Seminar Transformasi Digital", image: "images/achievement/Kegiatan_Mahasiswa.png" },
+  { title: "TOEFL Prediction Test", image: "images/achievement/Toefl.png" }
 ];
 
 const achOverlay = document.getElementById('achOverlay');
@@ -1624,6 +1703,38 @@ document.addEventListener('keydown', (e) => {
   if(e.key === 'ArrowRight') showNext();
   if(e.key === 'ArrowLeft') showPrev();
 });
+
+// ---------- achievements auto-slide carousel ----------
+const achTrack = document.getElementById('achievementTrack');
+if(achTrack){
+  // duplikasi semua card biar animasi looping mulus tanpa putus
+  const originalAchCards = Array.from(achTrack.children);
+  originalAchCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.setAttribute('tabindex', '-1');
+    clone.addEventListener('click', () => {
+      const idx = parseInt(clone.getAttribute('data-achievement'));
+      openAchievement(idx, clone);
+    });
+    achTrack.appendChild(clone);
+  });
+
+  let achPauseTimeout = null;
+  function pauseAchCarousel(){
+    clearTimeout(achPauseTimeout);
+    achTrack.classList.add('paused');
+  }
+  function resumeAchCarousel(delay){
+    clearTimeout(achPauseTimeout);
+    achPauseTimeout = setTimeout(() => achTrack.classList.remove('paused'), delay);
+  }
+
+  achTrack.addEventListener('mouseenter', pauseAchCarousel);
+  achTrack.addEventListener('mouseleave', () => resumeAchCarousel(800));
+  achTrack.addEventListener('touchstart', pauseAchCarousel, { passive:true });
+  achTrack.addEventListener('touchend', () => resumeAchCarousel(3000));
+}
 </script>
 
 </body>
