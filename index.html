@@ -775,6 +775,7 @@ nav{
   width:100%;
   position:relative;
   cursor:grab;
+  touch-action:pan-y;
   -webkit-mask-image:linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
   mask-image:linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
 }
@@ -791,9 +792,6 @@ nav{
   flex:0 0 300px;
   user-select:none;
   -webkit-user-select:none;
-}
-.achievement-carousel.dragging .achievement-card{
-  pointer-events:none;
 }
 .achievement-card{
   background:var(--surface);
@@ -1675,12 +1673,6 @@ function closeAchievement(){
   if(achLastFocused) achLastFocused.focus();
 }
 
-document.querySelectorAll('.achievement-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const idx = parseInt(card.getAttribute('data-achievement'));
-    openAchievement(idx, card);
-  });
-});
 
 achClose.addEventListener('click', closeAchievement);
 achNext.addEventListener('click', () => { achIndex = (achIndex + 1) % achievements.length; renderAch(); });
@@ -1711,48 +1703,35 @@ const achTrack = document.getElementById('achievementTrack');
 if(achTrack){
   const achCarousel = achTrack.parentElement;
 
-  // duplikasi semua card biar looping mulus tanpa putus
+  // duplikasi semua card asli biar looping mulus tanpa putus
   const originalAchCards = Array.from(achTrack.children);
   originalAchCards.forEach(card => {
     const clone = card.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
     clone.setAttribute('tabindex', '-1');
-    clone.addEventListener('click', () => {
-      if(achDragMoved) return; // jangan buka lightbox kalau habis drag
-      const idx = parseInt(clone.getAttribute('data-achievement'));
-      openAchievement(idx, clone);
-    });
     achTrack.appendChild(clone);
   });
-  // pasang ulang listener klik untuk card asli juga, biar konsisten cek achDragMoved
-  originalAchCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      if(achDragMoved) e.stopImmediatePropagation();
-    }, true);
-  });
 
-  let achPos = 0;            // posisi geser saat ini (px, negatif = geser ke kiri)
-  let achSpeed = 0.4;        // kecepatan auto-slide (px per frame)
-  let achPaused = false;     // true saat hover/sentuh/drag
+  let achPos = 0;
+  let achSpeed = 0.4;
+  let achPaused = false;
   let achResumeTimeout = null;
-  let achHalfWidth = 0;      // lebar 1 set asli (buat looping)
+  let achHalfWidth = 0;
 
-  let isDown = false;
-  let startX = 0;
-  let startPos = 0;
-  let achDragMoved = false;
-
-  function measure(){
-    achHalfWidth = achTrack.scrollWidth / 2;
-  }
+  function measure(){ achHalfWidth = achTrack.scrollWidth / 2; }
   measure();
   window.addEventListener('resize', measure);
 
+  let isPointerDown = false;
+  let isDragging = false;   // baru true setelah lewat ambang batas gerak
+  let startX = 0;
+  let startPos = 0;
+  const DRAG_THRESHOLD = 6; // px
+
   function tick(){
-    if(!achPaused && !isDown){
+    if(!achPaused && !isPointerDown){
       achPos -= achSpeed;
     }
-    // loop: kalau sudah geser sejauh 1 set penuh, reset tanpa kelihatan patah
     if(achPos <= -achHalfWidth) achPos += achHalfWidth;
     if(achPos > 0) achPos -= achHalfWidth;
     achTrack.style.transform = `translateX(${achPos}px)`;
@@ -1760,50 +1739,60 @@ if(achTrack){
   }
   requestAnimationFrame(tick);
 
-  function pauseAch(){
-    clearTimeout(achResumeTimeout);
-    achPaused = true;
-  }
+  function pauseAch(){ clearTimeout(achResumeTimeout); achPaused = true; }
   function resumeAchAfter(delay){
     clearTimeout(achResumeTimeout);
     achResumeTimeout = setTimeout(() => { achPaused = false; }, delay);
   }
 
-  function dragStart(clientX){
-    isDown = true;
-    achDragMoved = false;
-    startX = clientX;
+  achCarousel.addEventListener('pointerdown', (e) => {
+    isPointerDown = true;
+    isDragging = false;
+    startX = e.clientX;
     startPos = achPos;
-    achCarousel.classList.add('dragging');
     pauseAch();
-  }
-  function dragMove(clientX){
-    if(!isDown) return;
-    const delta = clientX - startX;
-    if(Math.abs(delta) > 4) achDragMoved = true;
-    achPos = startPos + delta;
-  }
-  function dragEnd(){
-    if(!isDown) return;
-    isDown = false;
+  });
+
+  window.addEventListener('pointermove', (e) => {
+    if(!isPointerDown) return;
+    const delta = e.clientX - startX;
+    if(!isDragging && Math.abs(delta) > DRAG_THRESHOLD){
+      isDragging = true;
+      achCarousel.classList.add('dragging');
+    }
+    if(isDragging){
+      achPos = startPos + delta;
+      e.preventDefault(); // cuma dicegah setelah beneran dragging
+    }
+  });
+
+  function endPointer(){
+    if(!isPointerDown) return;
+    isPointerDown = false;
     achCarousel.classList.remove('dragging');
     resumeAchAfter(1200);
-    setTimeout(() => { achDragMoved = false; }, 50);
+    // reset isDragging sedikit setelah, biar event 'click' yang menyusul masih bisa dicek
+    setTimeout(() => { isDragging = false; }, 0);
   }
-
-  // mouse
-  achCarousel.addEventListener('mousedown', (e) => { dragStart(e.clientX); e.preventDefault(); });
-  window.addEventListener('mousemove', (e) => dragMove(e.clientX));
-  window.addEventListener('mouseup', dragEnd);
-
-  // touch
-  achCarousel.addEventListener('touchstart', (e) => dragStart(e.touches[0].clientX), { passive:true });
-  achCarousel.addEventListener('touchmove', (e) => dragMove(e.touches[0].clientX), { passive:true });
-  achCarousel.addEventListener('touchend', dragEnd);
+  window.addEventListener('pointerup', endPointer);
+  window.addEventListener('pointercancel', endPointer);
 
   // hover pause (desktop, tanpa drag)
   achCarousel.addEventListener('mouseenter', pauseAch);
-  achCarousel.addEventListener('mouseleave', () => { if(!isDown) resumeAchAfter(800); });
+  achCarousel.addEventListener('mouseleave', () => { if(!isPointerDown) resumeAchAfter(800); });
+
+  // klik untuk buka lightbox — event delegation, cek isDragging di fase capture
+  achTrack.addEventListener('click', (e) => {
+    if(isDragging){
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    const card = e.target.closest('.achievement-card');
+    if(!card) return;
+    const idx = parseInt(card.getAttribute('data-achievement'));
+    openAchievement(idx, card);
+  }, true);
 }
 </script>
 
