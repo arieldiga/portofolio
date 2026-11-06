@@ -574,6 +574,16 @@ nav{
   display:flex;align-items:center;justify-content:center;
   font-size:2.4rem;color:var(--text-faint);
 }
+/* Cover yang punya bingkai hitam: perbesar & potong agar area ungu memenuhi kartu */
+.project-img-wrap{height:170px;overflow:hidden;background:var(--surface-2);}
+.project-img-wrap .project-img{
+  height:100%;
+  padding:0;
+  background:none;
+  object-fit:cover;            /* isi penuh, bukan "contain" */
+  object-position:center 60%;  /* geser ke atas/bawah: angka kecil = naik, besar = turun */
+  transform:scale(1.08);       /* perbesar sedikit untuk membuang sisa bingkai hitam */
+}
 .project-info{padding:20px;display:flex;flex-direction:column;flex:1;}
 .project-info h3{font-family:var(--display);font-size:1.05rem;margin-bottom:8px;}
 .project-info p{color:var(--text-muted);font-size:.88rem;margin-bottom:14px;}
@@ -606,6 +616,10 @@ nav{
 .project-detail-btn i{font-size:.72rem;transition:transform .2s ease;}
 .project-detail-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-dim);}
 .project-detail-btn:hover i{transform:translateX(2px);}
+.project-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;}
+.project-actions .project-detail-btn{margin-top:0;}
+.project-live-btn{background:var(--primary);border-color:var(--primary);color:#fff;}
+.project-live-btn:hover{background:#7342f0;border-color:#7342f0;color:#fff;}
 /* =========================================================
    PROJECT DETAIL MODAL / GALLERY
 ========================================================= */
@@ -1253,6 +1267,24 @@ footer{
         </button>
       </div>
     </div>
+
+    <div class="project-card">
+      <div class="project-img-wrap">
+        <img class="project-img" src="images/Snake-Game.png" alt="Tampilan Snake Game">
+      </div>
+      <div class="project-info">
+        <h3>Snake Game</h3>
+        <p data-i18n-en="A browser-based Snake game with a Go backend and a PostgreSQL online top-10 leaderboard. Features smooth 60 FPS animation, a realistic snake and apple, and on-screen touch controls for mobile." data-i18n-id="Game Snake berbasis browser dengan backend Go dan leaderboard top 10 online berbasis PostgreSQL. Dilengkapi animasi mulus 60 FPS, ular dan apel realistis, serta kontrol layar sentuh untuk HP.">Game Snake berbasis browser dengan backend Go dan leaderboard top 10 online berbasis PostgreSQL. Dilengkapi animasi mulus 60 FPS, ular dan apel realistis, serta kontrol layar sentuh untuk HP.</p>
+        <div class="tech-tags"><span>Go</span><span>PostgreSQL</span><span>JavaScript</span><span>HTML5 Canvas</span><span>Neon</span><span>Vercel</span></div>
+        <div class="project-actions">
+          <button type="button" class="project-detail-btn" data-project="snake-game">
+            <span data-i18n-en="View Detail" data-i18n-id="Lihat Detail">View Detail</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </button>
+          <a href="https://snake-game-kappa-lemon-16.vercel.app" target="_blank" rel="noopener" class="project-detail-btn project-live-btn">
+            <span data-i18n-en="Play Game" data-i18n-id="Mainkan Game">Play Game</span> <i class="fa-solid fa-play"></i>
+          </a>
+        </div>
+      </div>
   </div>
 </section>
 
@@ -1534,6 +1566,20 @@ const projectDetails = {
       "images/IOT_Portal/IOT_Portal4.png",
       "images/IOT_Portal/IOT_Portal5.png",
       "images/IOT_Portal/IOT_Portal6.png"
+    ]
+  },
+  "snake-game": {
+    title: "Snake Game",
+    description: {
+      en: "A browser-based Snake game with a Go backend and a PostgreSQL online top-10 leaderboard. Features smooth 60 FPS animation, a realistic snake and apple, and on-screen touch controls for mobile.",
+      id: "Game Snake berbasis browser dengan backend Go dan leaderboard top 10 online berbasis PostgreSQL. Dilengkapi animasi mulus 60 FPS, ular dan apel realistis, serta kontrol layar sentuh untuk HP."
+    },
+    tags: ["Go", "PostgreSQL", "JavaScript", "HTML5 Canvas", "Neon", "Vercel"],
+    images: [
+      "images/Snake-Game/1dekstop.png",
+      "images/Snake-Game/1android.png",
+      "images/Snake-Game/2android.png",
+      "images/Snake-Game/gameover.png"
     ]
   }
 };
