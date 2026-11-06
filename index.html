@@ -569,20 +569,21 @@ nav{
   flex-direction:column;
 }
 .project-card:hover{transform:translateY(-6px);border-color:var(--primary);}
-.project-img{width:100%;height:170px;object-fit:contain;display:block;background:var(--surface-2);padding:10px;}
+.project-img{
+  width:100%;
+  aspect-ratio:2 / 1;      /* ubah ke "2 / 1" kalau gambarmu lebih panjang ke samping */
+  height:auto;
+  object-fit:cover;         /* gambar memenuhi kotak, tanpa pita kosong */
+  display:block;
+  background:var(--surface-2);
+  padding:0;
+}
+.project-img.crop-edge{
+  object-view-box:inset(4% 4%);   /* inset(atas-bawah  kiri-kanan): potong tepi gambar */
+}
 .project-img.blank{
   display:flex;align-items:center;justify-content:center;
   font-size:2.4rem;color:var(--text-faint);
-}
-/* Cover yang punya bingkai hitam: perbesar & potong agar area ungu memenuhi kartu */
-.project-img-wrap{height:170px;overflow:hidden;background:var(--surface-2);}
-.project-img-wrap .project-img{
-  height:100%;
-  padding:0;
-  background:none;
-  object-fit:cover;            /* isi penuh, bukan "contain" */
-  object-position:center 60%;  /* geser ke atas/bawah: angka kecil = naik, besar = turun */
-  transform:scale(1.08);       /* perbesar sedikit untuk membuang sisa bingkai hitam */
 }
 .project-info{padding:20px;display:flex;flex-direction:column;flex:1;}
 .project-info h3{font-family:var(--display);font-size:1.05rem;margin-bottom:8px;}
@@ -1236,20 +1237,20 @@ footer{
 
   <div class="projects-grid">
     <div class="project-card">
-      <img class="project-img" src="images/SS-Porto.png" alt="Tampilan Portofolio Website">
+      <img class="project-img crop-edge" src="images/SS-Porto.png" alt="Tampilan Portofolio Website">
       <div class="project-info">
         <h3>Personal Portofolio Website</h3>
         <p data-i18n-en="A personal website that serves as a space to introduce myself, showcase projects, and document my experience as a developer." data-i18n-id="Website pribadi yang menjadi ruang untuk memperkenalkan diri, menampilkan proyek, dan mendokumentasikan pengalaman saya sebagai developer.">A personal website that serves as a space to introduce myself, showcase projects, and document my experience as a developer.</p>
-        <div class="tech-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        <div class="tech-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Vercel</span></div>
       </div>
     </div>
 
     <div class="project-card">
-      <img class="project-img" src="images/IOT_Portal.png" alt="Tampilan IOT Portal">
+      <img class="project-img crop-edge" src="images/IOT_Portal.png" alt="Tampilan IOT Portal">
       <div class="project-info">
         <h3>IOT Monitoring Portal</h3>
         <p data-i18n-en="A real time web portal for monitoring multi vendor water quality sensor data (pH, COD, TSS, NH3N, etc), developed during an internship at PT Lautan Air Indonesia." data-i18n-id="Web portal untuk monitoring data sensor kualitas air (pH, COD, TSS, NH3N, dll) secara real time dari multi vendor, dikembangkan saat magang di PT Lautan Air Indonesia.">Web portal untuk monitoring data sensor kualitas air (pH, COD, TSS, NH3N, dll) secara real time dari multi vendor, dikembangkan saat magang di PT Lautan Air Indonesia.</p>
-        <div class="tech-tags"><span>Laravel</span><span>PostgreSQL</span><span>JavaScript</span><span>Bootstrap</span></div>
+        <div class="tech-tags"><span>Laravel</span><span>PHP</span><span>PostgreSQL</span><span>JavaScript</span><span>Bootstrap</span></div>
         <button type="button" class="project-detail-btn" data-project="iot-portal">
           <span data-i18n-en="View Detail" data-i18n-id="Lihat Detail">View Detail</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </button>
@@ -1257,7 +1258,7 @@ footer{
     </div>
 
     <div class="project-card">
-      <img class="project-img" src="images/ticket_complaint.png" alt="Tampilan Ticket Complaint System">
+      <img class="project-img crop-edge" src="images/ticket_complaint.png" alt="Tampilan Ticket Complaint System">
       <div class="project-info">
         <h3>Ticket Complaint System</h3>
         <p data-i18n-en="A customer complaint ticketing management system featuring an analytics dashboard, NCR tracking, and email notifications. Developed during an internship at PT Lautan Air Indonesia." data-i18n-id="Sistem manajemen tiket keluhan pelanggan yang dilengkapi dengan dasbor analitik, pelacakan NCR, dan notifikasi email. Sistem ini dikembangkan selama masa magang di PT Lautan Air Indonesia.">A customer complaint ticketing management system featuring an analytics dashboard, NCR tracking, and email notifications. Developed during an internship at PT Lautan Air Indonesia.</p>
@@ -1269,9 +1270,7 @@ footer{
     </div>
 
     <div class="project-card">
-      <div class="project-img-wrap">
-        <img class="project-img" src="images/Snake-Game.png" alt="Tampilan Snake Game">
-      </div>
+      <img class="project-img crop-edge" src="images/Snake-Game.png" alt="Tampilan Snake Game">
       <div class="project-info">
         <h3>Snake Game</h3>
         <p data-i18n-en="A browser-based Snake game with a Go backend and a PostgreSQL online top-10 leaderboard. Features smooth 60 FPS animation, a realistic snake and apple, and on-screen touch controls for mobile." data-i18n-id="Game Snake berbasis browser dengan backend Go dan leaderboard top 10 online berbasis PostgreSQL. Dilengkapi animasi mulus 60 FPS, ular dan apel realistis, serta kontrol layar sentuh untuk HP.">Game Snake berbasis browser dengan backend Go dan leaderboard top 10 online berbasis PostgreSQL. Dilengkapi animasi mulus 60 FPS, ular dan apel realistis, serta kontrol layar sentuh untuk HP.</p>
